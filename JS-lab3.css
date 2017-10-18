@@ -1,0 +1,26 @@
+/* Q3  a*/
+
+h2{
+	font-size: 14px;
+}
+h3{
+	font-size: 24px;
+	margin:20px 60px;
+}
+#boad {
+    width: 320px;
+    height: 320px;
+    overflow: hidden;
+}
+
+.tile {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border: 1px solid pink;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    float: left;
+    cursor: pointer;
+}
