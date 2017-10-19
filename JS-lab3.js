@@ -32,12 +32,24 @@ document.getElementById("sum").innerHTML = sum;
 tiles = [];
 
 window.onload = function() {
+    // var  = document.getElementById('board');
+    startGame();
+} 
+
+    function startGame(){
+        countUpValue = 0;
+            let countText = 'Moves: ' + countUpValue;
+    document.getElementById("counter").innerHTML=countText;
+            startTimer();
     
     var arr = ['', '1', '2', '3', '4', '5', '6', '7', '8'];
     // shuffle
     shuffle(arr);
-    var panel = document.getElementById('boad');
+    var panel = document.getElementById('board');
+    panel.innerHTML = "";
     
+    tiles = [];
+
     // create div element
     for (i = 0; i < 9; i++){
         var div = document.createElement('div');
@@ -45,12 +57,14 @@ window.onload = function() {
         div.index = i;
         div.textContent = arr[i];
         div.onclick = click;
+        div.onmouseover = mouseover;
+        div.onmouseout = mouseout;
         panel.appendChild(div);
         tiles.push(div);
     }
-} 
+    }
 
-	// function for shaffle
+	// function for shuffle
 	function shuffle(arr) {
     var n = arr.length;
     var temp, i;
@@ -66,11 +80,37 @@ window.onload = function() {
 
 	// swap textContent
 	function swapContent(i, k){
-    
+        //add 1
+    countUpValue++;
+    //appear html
+    let countText = 'Moves: ' + countUpValue;
+    document.getElementById("counter").innerHTML=countText;
     	var temp = tiles[i].textContent;
     	tiles[i].textContent = tiles[k].textContent;
     	tiles[k].textContent = temp;
     
+}
+function mouseout(e) {
+    e.target.className = "tile";
+}
+function mouseover(e) {
+    var i = e.target.index;
+    let canBeMoved = false;
+
+    if (i <= 5 && tiles[i + 3].textContent == '' ){
+        canBeMoved = true;
+    }else if ( i >= 3 && tiles[i - 3].textContent == ''){
+        canBeMoved = true;
+    }else if (i % 3 !== 2 && tiles[i + 1].textContent == ''){
+        canBeMoved = true;
+    }else if (i % 3 !== 0 && tiles[i - 1].textContent == ''){
+        canBeMoved = true;
+    }
+    if (canBeMoved) {
+        e.target.className = "tile can-be-moved";
+    } else {
+        e.target.className = "tile cannot-be-moved";
+    }
 }
 
 // Onclick
@@ -91,19 +131,15 @@ function click(e) {
         // swap left
         swapContent(i, i - 1);
     }
+    answer = ['', '1', '2', '3', '4', '5', '6', '7', '8'];
+    if (JSON.stringify(arr)==JSON.stringify(answer)) {
+        setEndTime();
+    }
 }
 
 // Q13.c
 //counter initial value
 var countUpValue = 0;
-
-//Difinition function countUp 
-function countUp(){
-    //add 1
-    countUpValue++;
-    //appear html
-    document.getElementById("counter").innerHTML=cnt;
-}
 
 // Q13.d
 var timer1;
@@ -111,30 +147,30 @@ var startTime, nowTime;
 var btnStart = document.getElementById('counter');
 
 // start
-btnStart.addEventListener('click', function(){
-
-    var re = document.getElementById('result');
-    re.innerHTML = 'Start Time: 0';
-
-    // スタート時刻
-    startTime = new Date();
-    // タイマー開始
-    startTimer();
-    btnStart.disabled = true;
-});
-// タイマー開始
 function startTimer(){
-    timer1 = setInterval(showSecond, 1000);
-}
+    var re = document.getElementById('start-time');
+    startTime = new Date();
 
-// 秒数表示
-function showSecond(){
+    re.innerHTML = 'Start Time: ' + startTime.toTimeString().split(' ')[0];
+};
 
-    nowTime = new Date();
+function setEndTime(){
+    var re = document.getElementById('end-time');
+    endTime = new Date();
 
-    var elapsedTime = Math.floor((nowTime - startTime) / 1000);
-    var str = '経過秒数: ' + elapsedTime + '秒';
+    re.innerHTML = 'End Time: ' + endTime.toTimeString().split(' ')[0];
+};
 
-    var re = document.getElementById('result');
-    re.innerHTML = str;
-}
+// function setTimer(){
+//     timer1 = setInterval(showSecond, 1000);
+// }
+
+// function showSecond(){
+//     nowTime = new Date();
+
+//     var elapsedTime = Math.floor((nowTime - startTime) / 1000);
+//     var str = '経過秒数: ' + elapsedTime + '秒';
+
+//     var re = document.getElementById('start-time');
+//     re.innerHTML = str;
+// }

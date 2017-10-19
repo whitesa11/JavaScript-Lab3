@@ -7,7 +7,7 @@ h3{
 	font-size: 24px;
 	margin:20px 60px;
 }
-#boad {
+#board {
     width: 320px;
     height: 320px;
     overflow: hidden;
@@ -23,4 +23,12 @@ h3{
     font-weight: bold;
     float: left;
     cursor: pointer;
+}
+
+.can-be-moved {
+    background-color: green;
+}
+
+.cannot-be-moved {
+    background-color: red;
 }
