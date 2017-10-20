@@ -2,15 +2,21 @@
 
 var arr = ['dog', 'cat', 'deer'];
 var result = arr[0] + arr[2];
-document.getElementById("qa1-a").innerHTML = result;
+document.getElementById("q1-a").innerHTML = result;
 ;
 
 // Q1 b.
 var girls=["cecilie","Lone"];
 var boys = ["Emil", "Tobias", "Linus"];
 var children = girls.concat(boys);
-document.getElementById("demo").innerHTML = children;
+document.getElementById("q1-b").innerHTML = children;
 
+// Q1 c.
+var arr = [20, 30];
+for (var i = arr.length; i < 5; i += 1){
+  arr[i] = Math.pow(i,2);
+}
+document.getElementById("q1-c").innerHTML = arr;
 
 // Q2.
 var sumArray  = function(arr) {
@@ -28,7 +34,7 @@ var sum = sumArray(a)+sumArray(b)+sumArray(c)+sumArray(d)+sumArray(e);
 document.getElementById("sum").innerHTML = sum;
 
 
-// Q3.a,b
+// Q3
 tiles = [];
 
 window.onload = function() {
@@ -137,11 +143,9 @@ function click(e) {
     }
 }
 
-// Q13.c
 //counter initial value
 var countUpValue = 0;
 
-// Q13.d
 var timer1;
 var startTime, nowTime;
 var btnStart = document.getElementById('counter');
@@ -161,16 +165,3 @@ function setEndTime(){
     re.innerHTML = 'End Time: ' + endTime.toTimeString().split(' ')[0];
 };
 
-// function setTimer(){
-//     timer1 = setInterval(showSecond, 1000);
-// }
-
-// function showSecond(){
-//     nowTime = new Date();
-
-//     var elapsedTime = Math.floor((nowTime - startTime) / 1000);
-//     var str = '経過秒数: ' + elapsedTime + '秒';
-
-//     var re = document.getElementById('start-time');
-//     re.innerHTML = str;
-// }
